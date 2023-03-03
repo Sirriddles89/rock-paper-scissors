@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>rock-paper-scissors</title>
+</head>
+<body>
+    <h1>Rock-Paper-Scissors</h1>
+    <h2>Pseudocode</h2>
+    <p>
+        Let's start with the easiest thing: writing a function to take player input. 
+        Let's make that input case-insensitive, and then compare it to a preset array of strings
+        to ensure that it's a valid choice (i.e "rock", "paper", or "scissors"... duh)
+    </p>
+    <script>
+        function getPlayerChoice() {
+            let playerSelection = prompt("Enter 'rock', 'paper', or 'scissors'").toLowerCase();
+            if (playerSelection != "rock" && playerSelection != "paper" && playerSelection != "scissors") {
+                playerSelection = getPlayerChoice();
+            }
+            return playerSelection;
+        }
+
+        function getComputerChoice() {
+            const choices = ["rock", "paper", "scissors"];
+            let randomIndex = Math.floor(Math.random() * choices.length);
+            let computerChoice = choices[randomIndex];
+            return computerChoice;
+
+        }
+
+        console.log(getPlayerChoice());
+        console.log(getComputerChoice());
+    </script>
+</body>
+</html>
