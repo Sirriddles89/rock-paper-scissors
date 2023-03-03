@@ -16,11 +16,11 @@
     </p>
     <script>
         function getPlayerChoice() {
-            let playerSelection = prompt("Enter 'rock', 'paper', or 'scissors'").toLowerCase();
-            if (playerSelection != "rock" && playerSelection != "paper" && playerSelection != "scissors") {
-                playerSelection = getPlayerChoice();
+            let playerChoice = prompt("Enter 'rock', 'paper', or 'scissors'").toLowerCase();
+            if (playerChoice != "rock" && playerChoice != "paper" && playerChoice != "scissors") {
+                playerChoice = getPlayerChoice();
             }
-            return playerSelection;
+            return playerChoice;
         }
 
         function getComputerChoice() {
@@ -31,8 +31,47 @@
 
         }
 
-        console.log(getPlayerChoice());
-        console.log(getComputerChoice());
+        function playRound(playerSelection, computerSelection) {
+            switch(playerSelection) {
+                case "rock":
+                    if (computerSelection == "scissors") {
+                        return "You win! Rock crushes Scissors";
+                    }
+                    else if (computerSelection == "paper") {
+                        return "You lose! Paper covers Rock";
+                    }
+                    else return "It's a tie!";
+                case "paper":
+                    if (computerSelection == "scissors") {
+                        return "You lose! Scissors cut paper";
+                    }
+                    else if (computerSelection == "rock") {
+                        return "You win! Paper covers rock";
+                    }
+                    else return "It's a tie!";
+                case "scissors":
+                    if (computerSelection == "paper") {
+                        return "You win! Scissors cut paper";
+                    }
+                    else if (computerSelection == "rock") {
+                        return "You lose! Rock crushes scissors";
+                    }
+                    else return "It's a tie!";
+            }
+        }
+
+        function game() {
+            
+        }
+
+        const playerSelection = getPlayerChoice();
+        const computerSelection = getComputerChoice();
+
+        console.log(playerSelection);
+        console.log(computerSelection);
+
+        console.log(playRound(playerSelection, computerSelection));
+
     </script>
 </body>
 </html>
