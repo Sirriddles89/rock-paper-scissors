@@ -61,16 +61,50 @@
         }
 
         function game() {
+
+            let playerScore = 0;
+            let computerScore = 0;
+            for (let i = 0; i < 5; i++) {
+                //get inputs from player and computer
+                const playerSelection = getPlayerChoice();
+                const computerSelection = getComputerChoice();
+
+                console.log("playerChoice:", playerSelection);
+                console.log("computerChoice:", computerSelection);
+
+                //play a round
+                str = playRound(playerSelection, computerSelection);
+
+                let result = str.substring(0, 5);
+
+                if (result == "You w") {
+                    playerScore++;
+                    console.log("YourScore:", playerScore);
+                    alert(str);
+                }
+                else if (result == "You l") {
+                    computerScore++;
+                    console.log("ComputerScore:", computerScore);
+                    alert(str);
+                }
+                else alert(str);
+
+
+            }
+
             
+            if (playerScore > computerScore) {
+                return "You won!"
+            }
+            else if (computerScore > playerScore) {
+                return "You lost!"
+            }
+            else return "Tie game!"
         }
 
-        const playerSelection = getPlayerChoice();
-        const computerSelection = getComputerChoice();
-
-        console.log(playerSelection);
-        console.log(computerSelection);
-
-        console.log(playRound(playerSelection, computerSelection));
+        const result = game();
+        console.log(result);
+        alert(result);
 
     </script>
 </body>
