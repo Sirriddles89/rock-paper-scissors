@@ -23,7 +23,8 @@
         <p>Computer Score:</p>
     </div>
     <script>
-        function getPlayerChoice() {
+        //might end up deleting this function entirely
+        function getPlayerChoice(choice) {
             let playerChoice = prompt("Enter 'rock', 'paper', or 'scissors'").toLowerCase();
             if (playerChoice != "rock" && playerChoice != "paper" && playerChoice != "scissors") {
                 playerChoice = getPlayerChoice();
@@ -99,7 +100,6 @@
 
 
             }
-
             
             if (playerScore > computerScore) {
                 return "You won!"
@@ -110,9 +110,23 @@
             else return "Tie game!"
         }
 
-        const result = game();
-        console.log(result);
-        alert(result);
+        const buttons = document.querySelectorAll("button");
+
+        buttons.forEach((button) => {
+            button.addEventListener('click', () => {
+                let playerChoice = button.className;
+                let computerChoice = getComputerChoice();
+                console.log(playerChoice, computerChoice);
+                console.log(playRound(playerChoice, computerChoice));
+                
+            });
+        });
+
+
+
+        //const result = game();
+        //console.log(result);
+        //alert(result);
 
     </script>
 </body>
