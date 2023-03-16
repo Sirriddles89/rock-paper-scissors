@@ -78,6 +78,7 @@
         
         buttons.forEach((button) => {
             button.addEventListener('click', () => {
+                if (playerScore == 5 || computerScore == 5) return;
                 let playerChoice = button.className;
                 let computerChoice = getComputerChoice();
                 
@@ -98,7 +99,9 @@
                 else announcer.innerHTML = message; 
 
                 if (playerScore == 5 || computerScore == 5) {
-                    announcer.innerHTML = "Game Over, dood";
+                    setTimeout(function() {
+                        announcer.innerHTML = "Game Over, dood";
+                    }, 1500);
                     return;
                 }
             });
