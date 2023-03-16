@@ -64,28 +64,45 @@
             }
         }
 
+        function announceWinner(playerScore, computerScore, announcer) {
+            if (playerScore == 5) {
+                setTimeout(function() {
+                    announcer.innerHTML = "You win the game!"
+                    return true;
+                }, 1500);
+            }
+            else if (computerScore == 5){
+                setTimeout(function() {
+                    announcer.innerHTML = "You lost to YOUR BINARY OVERLORDS"
+                    return true;
+                }, 1500);
+            }
+            else return false;
+        }
+
         
         
-        let announcer = document.querySelector(".message");
-        let playerBoard = document.querySelector(".playerScore");
-        let computerBoard = document.querySelector(".computerScore");
+        const announcer = document.querySelector(".message");
+        const playerBoard = document.querySelector(".playerScore");
+        const computerBoard = document.querySelector(".computerScore");
         const buttons = document.querySelectorAll("button");
         let playerScore = 0;
         let computerScore = 0;
 
-        if (playerScore == 5 || computerScore == 5) announcer.innerHTML = "Game Over, dood";
-
         
         buttons.forEach((button) => {
             button.addEventListener('click', () => {
+                //don't execute loop if there's already a winner
                 if (playerScore == 5 || computerScore == 5) return;
+                
                 let playerChoice = button.className;
                 let computerChoice = getComputerChoice();
                 
+                //call playRound function to get a round winner                
                 let message = playRound(playerChoice, computerChoice);
                 let result = message.substring(0, 5);
 
-                
+                //update DOM elements on UI
                 if (result == "You w") {
                 ++playerScore;
                 announcer.innerHTML = message;
@@ -98,15 +115,12 @@
                 } 
                 else announcer.innerHTML = message; 
 
-                if (playerScore == 5 || computerScore == 5) {
-                    setTimeout(function() {
-                        announcer.innerHTML = "Game Over, dood";
-                    }, 1500);
-                    return;
-                }
+                //call announceWinner function to see if there's a winner yet
+                if (announceWinner(playerScore, computerScore, announcer) == true) return;
             });
-
         });
+
+       
 
         
         
