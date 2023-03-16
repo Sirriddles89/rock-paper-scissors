@@ -11,6 +11,14 @@ body {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
+.announcements {
+    background-color: white;
+    padding: 5px 10px;
+    border: black solid 2px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 700;
+}
+
 .choices {
     width: 70%;
     display: flex;

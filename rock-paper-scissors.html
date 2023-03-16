@@ -12,6 +12,10 @@
         <h1>Let's play Rock-Paper-Scissors!</h1>
     </div>
 
+    <div class="announcements">
+        <p class="message">Click to choose your play!</p>
+    </div>
+
     <div class="choices">
         <button class="rock">Rock</button>
         <button class="paper">Paper</button>
@@ -19,19 +23,10 @@
     </div>
 
     <div class="results">
-        <p>Your Score:</p>
-        <p>Computer Score:</p>
+        <p class="playerScore">Your Score: 0</p>
+        <p class="computerScore">Computer Score: 0</p>
     </div>
     <script>
-        //might end up deleting this function entirely
-        function getPlayerChoice(choice) {
-            let playerChoice = prompt("Enter 'rock', 'paper', or 'scissors'").toLowerCase();
-            if (playerChoice != "rock" && playerChoice != "paper" && playerChoice != "scissors") {
-                playerChoice = getPlayerChoice();
-            }
-            return playerChoice;
-        }
-
         function getComputerChoice() {
             const choices = ["rock", "paper", "scissors"];
             let randomIndex = Math.floor(Math.random() * choices.length);
@@ -69,58 +64,49 @@
             }
         }
 
-        function game() {
-
-            let playerScore = 0;
-            let computerScore = 0;
-            for (let i = 0; i < 5; i++) {
-                //get inputs from player and computer
-                const playerSelection = getPlayerChoice();
-                const computerSelection = getComputerChoice();
-
-                console.log("playerChoice:", playerSelection);
-                console.log("computerChoice:", computerSelection);
-
-                //play a round
-                str = playRound(playerSelection, computerSelection);
-
-                let result = str.substring(0, 5);
-
-                if (result == "You w") {
-                    playerScore++;
-                    console.log("YourScore:", playerScore);
-                    alert(str);
-                }
-                else if (result == "You l") {
-                    computerScore++;
-                    console.log("ComputerScore:", computerScore);
-                    alert(str);
-                }
-                else alert(str);
-
-
-            }
-            
-            if (playerScore > computerScore) {
-                return "You won!"
-            }
-            else if (computerScore > playerScore) {
-                return "You lost!"
-            }
-            else return "Tie game!"
-        }
-
+        
+        
+        let announcer = document.querySelector(".message");
+        let playerBoard = document.querySelector(".playerScore");
+        let computerBoard = document.querySelector(".computerScore");
         const buttons = document.querySelectorAll("button");
+        let playerScore = 0;
+        let computerScore = 0;
 
+        if (playerScore == 5 || computerScore == 5) announcer.innerHTML = "Game Over, dood";
+
+        
         buttons.forEach((button) => {
             button.addEventListener('click', () => {
                 let playerChoice = button.className;
                 let computerChoice = getComputerChoice();
-                console.log(playerChoice, computerChoice);
-                console.log(playRound(playerChoice, computerChoice));
                 
+                let message = playRound(playerChoice, computerChoice);
+                let result = message.substring(0, 5);
+
+                
+                if (result == "You w") {
+                ++playerScore;
+                announcer.innerHTML = message;
+                playerBoard.innerHTML = "Your Score: " + playerScore;
+                }
+                else if (result == "You l") {
+                    ++computerScore;
+                    announcer.innerHTML = message;
+                    computerBoard.innerHTML = "Computer Score: " + computerScore;
+                } 
+                else announcer.innerHTML = message; 
+
+                if (playerScore == 5 || computerScore == 5) {
+                    announcer.innerHTML = "Game Over, dood";
+                    return;
+                }
             });
+
         });
+
+        
+        
 
 
 
