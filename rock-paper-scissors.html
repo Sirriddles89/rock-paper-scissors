@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="styles.css" rel="stylesheet">
+    <script src="rock-paper-scissors.js" defer></script>
     <title>rock-paper-scissors</title>
 </head>
 <body>
@@ -16,6 +17,11 @@
         <p class="message">Click to choose your play!</p>
     </div>
 
+    <div class="selections">
+        <p class="playerSelection">Player</p>
+        <p class="computerSelection">CPU</p>
+    </div>
+
     <div class="choices">
         <button class="rock">Rock</button>
         <button class="paper">Paper</button>
@@ -24,138 +30,7 @@
 
     <div class="results">
         <p class="playerScore">Your Score: 0</p>
-        <p class="computerScore">Computer Score: 0</p>
+        <p class="computerScore">CPU Score: 0</p>
     </div>
-    
-    <script>
-
-        function getComputerChoice() {
-            const choices = ["rock", "paper", "scissors"];
-            let randomIndex = Math.floor(Math.random() * choices.length);
-            let computerChoice = choices[randomIndex];
-            return computerChoice;
-
-        }
-
-        function playRound(playerSelection, computerSelection) {
-            switch(playerSelection) {
-                case "rock":
-                    if (computerSelection == "scissors") {
-                        return "You win! Rock crushes Scissors";
-                    }
-                    else if (computerSelection == "paper") {
-                        return "You lose! Paper covers Rock";
-                    }
-                    else return "It's a tie!";
-                case "paper":
-                    if (computerSelection == "scissors") {
-                        return "You lose! Scissors cut paper";
-                    }
-                    else if (computerSelection == "rock") {
-                        return "You win! Paper covers rock";
-                    }
-                    else return "It's a tie!";
-                case "scissors":
-                    if (computerSelection == "paper") {
-                        return "You win! Scissors cut paper";
-                    }
-                    else if (computerSelection == "rock") {
-                        return "You lose! Rock crushes scissors";
-                    }
-                    else return "It's a tie!";
-            }
-        }
-
-        function determineRoundWinner(result) {
-            if (result == "You w") {
-                return true;
-            }
-            else if (result == "You l") {
-                return false;
-            }
-        }
-
-        function updateDOM(playerScore, computerScore, result, message) {
-            const announcer = document.querySelector(".message");
-            const announcerBackground = document.querySelector(".announcements");
-            const playerBoard = document.querySelector(".playerScore");
-            const computerBoard = document.querySelector(".computerScore");
-
-            announcer.innerHTML = message;
-
-            if (result == "You w") {
-                announcerBackground.style.backgroundColor = "LightGreen";
-                announcerBackground.style.color = "black";
-                playerBoard.innerHTML = "Your Score: " + playerScore;
-                }
-            else if (result == "You l") {
-                announcerBackground.style.backgroundColor = "crimson";
-                announcerBackground.style.color = "white";
-                computerBoard.innerHTML = "Computer Score: " + computerScore;
-            } 
-            else { 
-                announcerBackground.style.backgroundColor = "white";
-                announcerBackground.style.color = "black";
-            }          
-
-        }
-
-        function announceWinner(playerScore, computerScore) {
-            const announcer = document.querySelector(".message");
-
-            if (playerScore == 5) {
-                setTimeout(function() {
-                    announcer.innerHTML = "You win the game!"
-                    return true;
-                }, 1500);
-            }
-            else if (computerScore == 5){
-                setTimeout(function() {
-                    announcer.innerHTML = "You lost to YOUR BINARY OVERLORDS"
-                    return true;
-                }, 1500);
-            }
-            else return false;
-        }
-
-        
-        const buttons = document.querySelectorAll("button");
-        let playerScore = 0;
-        let computerScore = 0;
-
-        
-        buttons.forEach((button) => {
-            button.addEventListener('click', () => {
-                //don't execute loop if there's already a winner
-                if (playerScore == 5 || computerScore == 5) return;
-                
-                let playerChoice = button.className;
-                
-                //add visual feedback to player's button selection by briefly adding a class
-                button.classList.add("selected");
-                setTimeout(function() {
-                    button.classList.remove("selected")
-                }, 1000);
-
-                let computerChoice = getComputerChoice();
-                
-                
-                //call playRound function to get a round winner                
-                let message = playRound(playerChoice, computerChoice);
-                let result = message.substring(0, 5);
-
-                //update scores
-                if (determineRoundWinner(result) == true) playerScore++;
-                else if (determineRoundWinner(result) == false) computerScore++;
-
-                //update DOM elements on UI
-                updateDOM(playerScore, computerScore, result, message);
-
-                //call announceWinner function to see if there's a winner yet
-                if (announceWinner(playerScore, computerScore) == true) return;
-            });
-        });
-
-    </script>
 </body>
 </html>
