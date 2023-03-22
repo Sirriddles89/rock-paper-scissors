@@ -4,110 +4,33 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="styles.css" rel="stylesheet">
+    <script src="rock-paper-scissors.js" defer></script>
     <title>rock-paper-scissors</title>
 </head>
 <body>
-    <h1>Rock-Paper-Scissors</h1>
-    <h2>Pseudocode</h2>
-    <p>
-        Let's start with the easiest thing: writing a function to take player input. 
-        Let's make that input case-insensitive, and then compare it to a preset array of strings
-        to ensure that it's a valid choice (i.e "rock", "paper", or "scissors"... duh)
-    </p>
+    <div class="header">
+        <h1>Let's play Rock-Paper-Scissors!</h1>
+    </div>
 
-    <p>This is only a test</p>
-    <script>
-        function getPlayerChoice() {
-            let playerChoice = prompt("Enter 'rock', 'paper', or 'scissors'").toLowerCase();
-            if (playerChoice != "rock" && playerChoice != "paper" && playerChoice != "scissors") {
-                playerChoice = getPlayerChoice();
-            }
-            return playerChoice;
-        }
+    <div class="announcements">
+        <p class="message">Click to choose your play!</p>
+    </div>
 
-        function getComputerChoice() {
-            const choices = ["rock", "paper", "scissors"];
-            let randomIndex = Math.floor(Math.random() * choices.length);
-            let computerChoice = choices[randomIndex];
-            return computerChoice;
+    <div class="selections">
+        <p class="playerSelection">Player</p>
+        <p class="computerSelection">CPU</p>
+    </div>
 
-        }
+    <div class="choices">
+        <button class="rock">Rock</button>
+        <button class="paper">Paper</button>
+        <button class="scissors">Scissors</button>
+    </div>
 
-        function playRound(playerSelection, computerSelection) {
-            switch(playerSelection) {
-                case "rock":
-                    if (computerSelection == "scissors") {
-                        return "You win! Rock crushes Scissors";
-                    }
-                    else if (computerSelection == "paper") {
-                        return "You lose! Paper covers Rock";
-                    }
-                    else return "It's a tie!";
-                case "paper":
-                    if (computerSelection == "scissors") {
-                        return "You lose! Scissors cut paper";
-                    }
-                    else if (computerSelection == "rock") {
-                        return "You win! Paper covers rock";
-                    }
-                    else return "It's a tie!";
-                case "scissors":
-                    if (computerSelection == "paper") {
-                        return "You win! Scissors cut paper";
-                    }
-                    else if (computerSelection == "rock") {
-                        return "You lose! Rock crushes scissors";
-                    }
-                    else return "It's a tie!";
-            }
-        }
-
-        function game() {
-
-            let playerScore = 0;
-            let computerScore = 0;
-            for (let i = 0; i < 5; i++) {
-                //get inputs from player and computer
-                const playerSelection = getPlayerChoice();
-                const computerSelection = getComputerChoice();
-
-                console.log("playerChoice:", playerSelection);
-                console.log("computerChoice:", computerSelection);
-
-                //play a round
-                str = playRound(playerSelection, computerSelection);
-
-                let result = str.substring(0, 5);
-
-                if (result == "You w") {
-                    playerScore++;
-                    console.log("YourScore:", playerScore);
-                    alert(str);
-                }
-                else if (result == "You l") {
-                    computerScore++;
-                    console.log("ComputerScore:", computerScore);
-                    alert(str);
-                }
-                else alert(str);
-
-
-            }
-
-            
-            if (playerScore > computerScore) {
-                return "You won!"
-            }
-            else if (computerScore > playerScore) {
-                return "You lost!"
-            }
-            else return "Tie game!"
-        }
-
-        const result = game();
-        console.log(result);
-        alert(result);
-
-    </script>
+    <div class="results">
+        <p class="playerScore">Your Score: 0</p>
+        <p class="computerScore">CPU Score: 0</p>
+    </div>
 </body>
 </html>
